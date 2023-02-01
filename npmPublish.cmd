@@ -1,1 +1,1 @@
-npm publish --access public
+cmd /c npm publish --access public

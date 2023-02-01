@@ -1,7 +1,7 @@
 {
   "name": "@telemok/bitdataview",
-  "version": "0.1.0",
-  "description": "DataView, but with bit address, custom int bit size, push. pop, shift, unshift functions",
+  "version": "0.1.1",
+  "description": "DataView with bit addressing, custom int bit size, set, get, push, pop, shift, unshift functions",
   "main": "lib/bitdataview.js",
   "scripts": {
     "test": "node test/test.js"
@@ -16,10 +16,29 @@
     "push",
     "pop",
     "shift",
-    "unshift"
+    "unshift",
+    "queue",
+    "stack",
+    "array",
+    "buffer",
+    "serialize",
+    "deserialize",
+    "encode",
+    "decode",
+    "LSB",
+    "MSB",
+    "BitQueue",
+    "BitStack",
+    "BitBuffer",
+    "BitArray",
+    "binary",
+    "significant",
+    "endian",
+    "pack",
+    "unpack"
   ],
   "type":"module",
-  "author": "Arsh",
+  "author": "Dmitrii Arshinnikov <www.telemok.com@gmail.com> github.com/Telemok npmjs.com/~telemok",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/telemok/bitdataview/issues"
@@ -27,5 +46,12 @@
   "homepage": "https://github.com/telemok/bitdataview#readme",
   "dependencies": {
     "@telemok/valda": "^0.0.5"
+  },
+  "publishConfig": {
+    "ignore": [
+      ".idea/",
+      ".git",
+      ".gitattributes"
+    ]
   }
 }

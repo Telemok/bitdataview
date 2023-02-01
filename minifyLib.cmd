@@ -1,1 +1,1 @@
-npx minify lib/bitdataview.js > lib/bitdataview.min.js
+cmd /c npx minify lib/bitdataview.js > lib/bitdataview.min.js

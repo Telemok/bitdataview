@@ -4,7 +4,7 @@ let bitDataView = new BitDataView({
 	automaticMemoryExpansion: false,
 	bufferBaseSizeBits: 800 * 8
 });
-bitDataView.push_Booleans(0, 800 * 8);
+bitDataView.push_Bits(0, 800 * 8);
 //const uint8Array = new Uint8Array(800);
 const byteDataView = new DataView(bitDataView._getData().buffer);
 
@@ -26,22 +26,22 @@ for(let isLittleEndian = 0; isLittleEndian < 2; isLittleEndian++)
 		let byteOffset = Math.floor(Math.random() * 700);
 
 		valueOrigin = Math.floor(Math.random() * 0x100000000);
-		bitDataView.setAt_Uint53orLess(byteOffset * 8, 32, valueOrigin);
+		bitDataView.setAt_Uint(byteOffset * 8, 32, valueOrigin);
 		valueCheckedDataView = byteDataView.getUint32(byteOffset, isLittleEndian ? true: false);
 		if(valueOrigin !== valueCheckedDataView)
 			throw new Error(`setAt_Uint53orLess`);
-		valueGetted = bitDataView.getAt_Uint53orLess(byteOffset * 8, 32);
+		valueGetted = bitDataView.getAt_Uint(byteOffset * 8, 32);
 		if(valueOrigin !== valueGetted)
 			throw new Error(`getAt_Uint53orLess`);
 
 
 		/*JavaScript support Uint53 and Int54, but it hard to make library with Int54 with significant and endianness*/
 		valueOrigin = Math.floor(Math.random() * 0x80000000) - 0x40000000;
-		bitDataView.setAt_Int53orLess(byteOffset * 8, 32, valueOrigin);
+		bitDataView.setAt_Int(byteOffset * 8, 32, valueOrigin);
 		valueCheckedDataView = byteDataView.getInt32(byteOffset, isLittleEndian ? true: false);
 		if(valueOrigin !== valueCheckedDataView)
 			throw new Error(`setAt_Int53orLess`);
-		valueGetted = bitDataView.getAt_Int53orLess(byteOffset * 8, 32);
+		valueGetted = bitDataView.getAt_Int(byteOffset * 8, 32);
 		if(valueOrigin !== valueGetted)
 		{
 			console.error(valueOrigin.toString(16), valueCheckedDataView.toString(16), valueGetted.toString(16))
@@ -49,38 +49,38 @@ for(let isLittleEndian = 0; isLittleEndian < 2; isLittleEndian++)
 		}
 
 		valueOrigin = Math.floor(Math.random() * 0x10000);
-		bitDataView.setAt_Uint53orLess(byteOffset * 8, 16, valueOrigin);
+		bitDataView.setAt_Uint(byteOffset * 8, 16, valueOrigin);
 		valueCheckedDataView = byteDataView.getUint16(byteOffset, isLittleEndian ? true: false);
 		if(valueOrigin !== valueCheckedDataView)
 			throw new Error(`setAt_Uint53orLess`);
-		valueGetted = bitDataView.getAt_Uint53orLess(byteOffset * 8, 16);
+		valueGetted = bitDataView.getAt_Uint(byteOffset * 8, 16);
 		if(valueOrigin !== valueGetted)
 			throw new Error(`getAt_Uint53orLess`);
 
 		valueOrigin = Math.floor(Math.random() * 0x100);
-		bitDataView.setAt_Uint53orLess(byteOffset * 8, 8, valueOrigin);
+		bitDataView.setAt_Uint(byteOffset * 8, 8, valueOrigin);
 		valueCheckedDataView = byteDataView.getUint8(byteOffset, isLittleEndian ? true: false);
 		if(valueOrigin !== valueCheckedDataView)
 			throw new Error(`setAt_Uint53orLess`);
-		valueGetted = bitDataView.getAt_Uint53orLess(byteOffset * 8, 8);
+		valueGetted = bitDataView.getAt_Uint(byteOffset * 8, 8);
 		if(valueOrigin !== valueGetted)
 			throw new Error(`getAt_Uint53orLess`);
 
 		valueOrigin = Math.floor(Math.random() * 0x100);
-		bitDataView.setAt_Uint8orLess(byteOffset * 8, 8, valueOrigin);
+		bitDataView.setAt_Byte(byteOffset * 8, 8, valueOrigin);
 		valueCheckedDataView = byteDataView.getUint8(byteOffset, isLittleEndian ? true: false);
 		if(valueOrigin !== valueCheckedDataView)
 			throw new Error(`setAt_Uint8orLess`);
-		valueGetted = bitDataView.getAt_Uint8orLess(byteOffset * 8, 8);
+		valueGetted = bitDataView.getAt_Byte(byteOffset * 8, 8);
 		if(valueOrigin !== valueGetted)
 			throw new Error(`getAt_Uint8orLess`);
 
 		valueOrigin = (BigInt(Math.floor(Math.random() * 0x100000000))<<32n) | BigInt(Math.floor(Math.random() * 0x100000000));
-		bitDataView.setAt_BigUint64orLess(byteOffset * 8, 64, valueOrigin);
+		bitDataView.setAt_BigUint(byteOffset * 8, 64, valueOrigin);
 		valueCheckedDataView = byteDataView.getBigUint64(byteOffset, isLittleEndian ? true: false);
 		if(valueOrigin !== valueCheckedDataView)
 			throw new Error(`setAt_BigUint64orLess: ${valueOrigin}, ${valueCheckedDataView}`);
-		valueGetted = bitDataView.getAt_BigUint64orLess(byteOffset * 8);
+		valueGetted = bitDataView.getAt_BigUint(byteOffset * 8);
 		if(valueOrigin !== valueGetted)
 			throw new Error(`getAt_BigUint64orLess`);
 
