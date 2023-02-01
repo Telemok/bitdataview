@@ -6,7 +6,7 @@ ES6 bit addressing DataView+Stack+Queue+Array+Buffer with any types: Uint13, Int
 
 - Like **DataView**, but with **bit addressing**.
 - **.set(), .get(), .push(), .unshift(), .pop(), .shift()** functions for each data type.
-- Data types: boolean and custom bit size uint, float. For example: **Uint17**, **Int37** or **BigUint61**.
+- Data types: boolean and custom bit size integers and floats. For example: **Uint17**, **Int37** or **BigUint61**.
 - Like a **BitBuffer**, **BitArray**, **BitStack**, **BitQueue**.
 - **Small memory** using: 1 bit in memory for every 1 bit data. 23 bits data => 3 bytes in RAM.
 - Full **assert arguments** of functions.
@@ -18,6 +18,7 @@ ES6 bit addressing DataView+Stack+Queue+Array+Buffer with any types: Uint13, Int
 - Binary parsing and decrypting RS-232, HDLC, Ethernet, USB, Can-Bus, TCP/IP RAW packets.
 - NodeJs and browser Javascript support.
 - Can be used in external schemas. Used in Telemok schemas.
+- Old browser support
 
 ## Examples:
 
@@ -32,18 +33,18 @@ let sourceData = {
 	msecUptime: -1234567890123, // maximal 43 bits
 };
 let source = new BitDataView();
-source.push_Uint53orLess(7, sourceData.percents);// pack 7 bits
-source.push_Booleans(sourceData.isOn);// pack 1 bit
-source.push_Int53orLess(43, sourceData.msecUptime);// pack 43 bits
+source.push_Uint(7, sourceData.percents);// pack 7 bits
+source.push_Bits(sourceData.isOn);// pack 1 bit
+source.push_Int(43, sourceData.msecUptime);// pack 43 bits
 let hex = source.exportHex();//export 7 + 1 + 43 = 51 bits or 5 bytes
 //send hex to another device, or store to localstorage
 // [another computer another script.js]
 let dest = new BitDataView();
 dest.importHex(hex);
 let result = {};
-result.percents = dest.shift_Uint53orLess(7);
-result.isOn = dest.shift_Boolean();
-result.msecUptime = dest.shift_Int53orLess(43);
+result.percents = dest.shift_Uint(7);
+result.isOn = dest.shift_Bit();
+result.msecUptime = dest.shift_Int(43);
 console.log("result", result);
 ```
 
@@ -277,12 +278,50 @@ Little endian and big endian.
 
 1000 random offsets and values
 ```javascript
-dataView.getUint32() vs .setAt_Uint53orLess(32) and .getAt_Uint53orLess(32)
-dataView.getInt32() vs .setAt_Int53orLess(32) and .getAt_Int53orLess(32)
-dataView.getUint16() vs .setAt_Uint53orLess(16) and .getAt_Uint53orLess(16)
-dataView.getUint8() vs .setAt_Uint53orLess(8) and .getAt_Uint53orLess(8)
-dataView.getUint8() vs .setAt_Uint8orLess(8) and .getAt_Uint8orLess(8)
-dataView.getBigUint64() vs .setAt_BigUint64orLess(64) and .getAt_BigUint64orLess(64)
+dataView.getUint32() vs .setAt_Uint(32) and .getAt_Uint(32)
+dataView.getInt32() vs .setAt_Int(32) and .getAt_Int(32)
+dataView.getUint16() vs .setAt_Uint(16) and .getAt_Uint(16)
+dataView.getUint8() vs .setAt_Uint(8) and .getAt_Uint(8)
+dataView.getUint8() vs .setAt_Byte(8) and .getAt_Byte(8)
+dataView.getBigUint64() vs .setAt_BigUint(64) and .getAt_BigUint(64)
 dataView.getFloat64() vs .setAt_Float64() and .getAt_Float64()
 dataView.getFloat32() vs .setAt_Float32() and .getAt_Float32()
 ```
+
+## Another libs another authors:
+
+---
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView
+
+Only 8xbit addressing, only 8xbit variables, no stack/queue.
+
+---
+https://nodejs.org/api/buffer.html
+
+Only 8xbit addressing, only 8xbit variables, no stack/queue.
+
+---
+https://github.com/feross/buffer
+
+Only 8xbit addressing, only 8xbit variables, no stack/queue, ?no LE/BE.
+
+---
+https://github.com/JoshGlazebrook/smart-buffer
+
+Only 8xbit addressing, only 8xbit variables, no stack/queue, ?no LE/BE.
+
+---
+https://github.com/FlorianWendelborn/bitwise
+
+No buffer, no stack/queue, only bits as arrays operations.
+
+---
+https://github.com/inolen/bit-buffer
+
+Only 8xbit addressing, only 8xbit variables, no stack/queue.
+
+---
+https://github.com/rochars/byte-data
+
+Only 8xbit addressing, only 8xbit variables, no stack.
