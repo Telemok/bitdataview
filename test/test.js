@@ -84,6 +84,17 @@ for(let isLittleEndian = 0; isLittleEndian < 2; isLittleEndian++)
 		if(valueOrigin !== valueGetted)
 			throw new Error(`getAt_BigUint64orLess`);
 
+		valueOrigin = (BigInt(Math.floor(Math.random() * 0x80000000)) << 32n) | BigInt(Math.floor(Math.random() * 0x100000000));
+		valueOrigin *= (Math.random() > 0.5 ? -1n : 1n);
+		//console.log("valueOrigin",valueOrigin.toString(2))
+		bitDataView.setAt_BigInt(byteOffset * 8, 64, valueOrigin);
+		valueCheckedDataView = byteDataView.getBigInt64(byteOffset, isLittleEndian ? true: false);
+		if(valueOrigin !== valueCheckedDataView)
+			throw new Error(`setAt_BigUint64orLess: ${valueOrigin}, ${valueCheckedDataView}`);
+		valueGetted = bitDataView.getAt_BigInt(byteOffset * 8, 64);
+		if(valueOrigin !== valueGetted)
+			throw new Error(`getAt_BigUint64orLess`);
+
 		valueOrigin = Math.random() ;
 		byteDataView.setFloat64(0, valueOrigin);
 		valueOrigin = byteDataView.getFloat64(0);

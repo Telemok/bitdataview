@@ -1,10 +1,11 @@
 {
   "name": "@telemok/bitdataview",
-  "version": "0.1.2",
-  "description": "ES6 bit addressing DataView+Stack+Queue+Array+Buffer with any types: Uint13, Int53, BigInt61, Float17, LSB/MSB, LE/BE, .set(), .get(), .push(), .pop(), .shift(), .unshift()",
+  "version": "0.1.4",
+  "description": "ES6 bit addressing DataView+Stack+Queue+Buffer with any types: Uint13, Int53, BigInt61, Float17, LSB/MSB, LE/BE, .set(), .get(), .push(), .pop(), .shift(), .unshift()",
   "main": "lib/bitdataview.js",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+	"example1": "node examples/example1.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "binary",
     "significant",
     "endian",
+    "signed",
     "pack",
     "unpack"
   ],
